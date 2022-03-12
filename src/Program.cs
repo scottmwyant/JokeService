@@ -1,9 +1,14 @@
-using sample.service;
+using App.WindowsService;
 
-IHost host = Host.CreateDefaultBuilder(args)
+using IHost host = Host.CreateDefaultBuilder(args)
+    .UseWindowsService(options =>
+    {
+        options.ServiceName = ".NET Joke Service";
+    })
     .ConfigureServices(services =>
     {
-        services.AddHostedService<Worker>();
+        services.AddSingleton<JokeService>();
+        services.AddHostedService<WindowsBackgroundService>();
     })
     .Build();
 
