@@ -1,4 +1,4 @@
-using App.WindowsService;
+using Sample.Service.WindowsService;
 
 using IHost host = Host.CreateDefaultBuilder(args)
     .UseWindowsService(options =>

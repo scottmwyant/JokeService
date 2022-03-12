@@ -1,4 +1,4 @@
-namespace App.WindowsService;
+namespace Sample.Service.WindowsService;
 
 public sealed class WindowsBackgroundService : BackgroundService
 {
