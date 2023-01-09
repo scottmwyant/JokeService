@@ -7,28 +7,29 @@ https://docs.microsoft.com/en-us/dotnet/core/extensions/windows-service
 
 ## Building the source code
 
-A default build task has been configured for VS Code.  Simply run the `dotnet publish` task.
+A default build task has been configured for VS Code.  Simply run the `publish` task.  Once the project is built, it has to be `installed` as a service and started.  Once it's installed, it must be stopped before building again.  After rebuilding, the service can be restarted and it will use the rebuilt version.
 
-## Running the service
+## Next steps:
 
-Use the Windows Service Control Manager, *sc.exe*
+1. Combine the two samples.  Make a service that includes an MQTT client, send the jokes to the broker and to the log file.
+    Options might include the host, port, username, and password for the mqtt broker. 
 
-Install the service
+2. Use the options pattern (link below) to get configuration values to the right place.
 
-`sc.exe create ".NET Joke Service" binpath="C:\Path\To\Sample.Service.exe"`
+- https://learn.microsoft.com/en-us/dotnet/core/extensions/configuration-providers?source=recommendations
+- https://learn.microsoft.com/en-us/dotnet/core/extensions/configuration?source=recommendations
+- https://learn.microsoft.com/en-us/dotnet/core/extensions/options
+- https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.hosting.host.createdefaultbuilder?view=dotnet-plat-ext-7.0
 
-Start the service
+Use appsettings.json for SeriLog
 
-`sc.exe start ".NET Joke Service"`
+- https://www.nuget.org/packages/Serilog.Settings.Configuration/3.5.0-dev-00370
 
-View logs
+Use this to tie Serilog to the host
 
-Use `Event Viewer > Windows Logs > Application`.  You should see a log entry with a severity of `Warning` and a source of `Sample.Service`.  This sample code is designed to log a random joke every minute.
+- https://www.nuget.org/packages/Serilog.Extensions.Hosting
+- https://stackoverflow.com/questions/57070972/how-to-add-a-serilog-logger-to-a-generichost-project-in-c-sharp
 
-Stop the service
+Use this to log to a rolling file
 
-`sc.exe stop ".NET Joke Service"`
-
-Delete the service
-
-`sc.exe delete ".NET Joke Service"`
+- https://www.nuget.org/packages/Serilog.Sinks.File/5.0.1-dev-00947
