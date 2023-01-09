@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Sample.Service</RootNamespace>
     <OutputType>exe</OutputType>
+    <AssemblyName>JokeService</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
