@@ -9,9 +9,13 @@ using IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices(services =>
     {
         services.AddSingleton<JokeService>();
+        services.AddSingleton<MqttService>();
         services.AddHostedService<WindowsBackgroundService>();
     })
     .UseSerilog((context, loggerConfiguration) => loggerConfiguration
+            // .MinimumLevel.Debug()
+            // .MinimumLevel.Override("Microsoft", Serilog.Events.LogEventLevel.Information)
+            // .Enrich.FromLogContext()
             .WriteTo.File(
                 path: Path.Join(context.HostingEnvironment.ContentRootPath, "log.txt"),
                 rollOnFileSizeLimit: true,
